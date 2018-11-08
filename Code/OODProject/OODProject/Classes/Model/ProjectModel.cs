@@ -8,7 +8,7 @@ namespace OODProject.Classes.Model
 {
     public class ProjectModel
     {
-        List<Process> CurrentProcess { get; set; }
-        List<MemoryBlock> InternalMemory { get; set; }
+        List<Process> ProcessList { get; set; }
+        List<MemoryBlock> MemoryBlocks { get; set; }
     }
 }

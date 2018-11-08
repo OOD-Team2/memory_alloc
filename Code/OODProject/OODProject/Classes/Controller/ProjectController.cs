@@ -31,7 +31,9 @@ namespace OODProject.Classes.Controller
 
         public void DeAllocateProcess(Process process)
         {
-            MemoryStrategy.AllocateProcess(process);
+            MemoryStrategy.DeAllocateProcess(process);
+            DisplayView.DataModel = MemoryStrategy.DataModel;
+            DisplayView.RefreshView();
         }
 
         public void LoadView()
