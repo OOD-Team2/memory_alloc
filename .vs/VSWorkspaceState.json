@@ -1,10 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Algorithm",
-    "\\Interface",
+    "\\Code",
     "\\ProcessPackage"
   ],
-  "SelectedNode": "\\ProcessPackage\\ProcessCollection.cs",
+  "SelectedNode": "\\Code",
   "PreviewInSolutionExplorer": false
 }
