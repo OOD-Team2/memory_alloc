@@ -13,5 +13,6 @@ namespace OODProject.Classes.MemoryAllocation
 
         bool AllocateProcess(Process objProcess);
         bool DeAllocateProcess(Process objProcess);
+        ///////
     }
 }
