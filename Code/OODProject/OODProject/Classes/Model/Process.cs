@@ -8,7 +8,10 @@ namespace OODProject.Classes.Model
 {
     public class Process
     {
-        public string ID { get; set; }
+        public Int32 ID { get; set; }
         public Int32 MemoryInKB { get; set; }
+        public String Type;
+
+ 
     }
 }

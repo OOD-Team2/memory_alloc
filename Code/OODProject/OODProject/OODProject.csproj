@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Classes\Controller\ProjectController.cs" />
     <Compile Include="Classes\MemoryAllocation\BuddySystemStrategy.cs" />
+    <Compile Include="Classes\MemoryAllocation\BuddySystem.cs" />
     <Compile Include="Classes\MemoryAllocation\IMemoryAllocationStrategy.cs" />
     <Compile Include="Classes\Model\MemoryBlock.cs" />
     <Compile Include="Classes\Model\Process.cs" />

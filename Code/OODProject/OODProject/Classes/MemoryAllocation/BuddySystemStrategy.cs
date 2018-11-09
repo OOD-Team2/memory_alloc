@@ -11,13 +11,21 @@ namespace OODProject.Classes.MemoryAllocation
     {        
         public BuddySystemStrategy(){
             DataModel = new ProjectModel();
+            MemoryModel = new MemoryBlock();
         }
 
         public ProjectModel DataModel { get ; set ; }
 
         public bool AllocateProcess(Process objProcess)
         {
-            throw new NotImplementedException();
+            int b = (int)Math.Ceiling(Math.Log(objProcess.MemoryInKB, 2));
+            int blockLength = (int)Math.Pow(2, b);
+            int startIndex = 0, endIndex = 0;
+
+            for (int i = DataModel.getSize(); i >= 0; i = i / 2)
+            {
+             
+            }
         }
 
         public bool DeAllocateProcess(Process objProcess)
