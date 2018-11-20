@@ -36,7 +36,7 @@ namespace OODProject.Classes.MemoryAllocation
             }
 
             if (response == true) {
-                MemoryModifiedEventArgs arg = new MemoryModifiedEventArgs { Memory = this.Memory };
+                MemoryModifiedEventArgs arg = new MemoryModifiedEventArgs { Memory = this.Memory, Processes = this.Processes };
 
                 OnModified(arg);
             }

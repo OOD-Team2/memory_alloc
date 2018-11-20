@@ -117,6 +117,8 @@ namespace OODProject.Classes.MemoryAllocation
                 }
             }
 
+            Processes.Add(proc);
+
             return true;
         }
        
@@ -148,6 +150,12 @@ namespace OODProject.Classes.MemoryAllocation
                 }
 
                 if (isEnd) break;
+            }
+
+            for(int i= Processes.Count -1; i >0; i--)
+            {
+                if (Processes[i].ID == proc.ID)
+                    Processes.RemoveAt(i);
             }
 
             return true;

@@ -17,5 +17,6 @@ namespace OODProject.Classes.MemoryAllocation
     public class MemoryModifiedEventArgs : EventArgs
     {
         public List<MemoryBlock> Memory { get; set; }
+        public List<Process> Processes { get; set; }
     }
 }

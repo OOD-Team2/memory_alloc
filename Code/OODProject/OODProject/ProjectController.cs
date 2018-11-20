@@ -38,7 +38,7 @@ namespace OODProject
             {
                 strategy.FeedProcess(feeder.GetNextProcess());
 
-                System.Threading.Thread.Sleep(5000);
+                Thread.Sleep(1000);
             }
         }          
     }
