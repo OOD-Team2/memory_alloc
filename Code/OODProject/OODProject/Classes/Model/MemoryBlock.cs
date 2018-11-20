@@ -8,6 +8,9 @@ namespace OODProject.Classes.Model
 {
     public class MemoryBlock
     {
-        public Int32 BlockId { get; set; }
+        public Int32 ProcessId { get; set; }
+        public bool IsStart { get; set; }
+        public bool IsEnd { get; set; }
+        public bool IsAssigned { get; set; }
     }
 }

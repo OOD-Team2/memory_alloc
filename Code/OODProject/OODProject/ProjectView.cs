@@ -1,4 +1,4 @@
-﻿using OODProject.Classes.Controller;
+﻿using OODProject.Classes.MemoryAllocation;
 using OODProject.Classes.Model;
 using OODProject.Classes.View;
 using System;
@@ -13,35 +13,38 @@ using System.Windows.Forms;
 
 namespace OODProject
 {
-    public partial class ProjectView : Form, IProjectView
+    public partial class ProjectView : Form, IMemoryView
     {
-        ProjectController ViewController;
-
         public ProjectView()
         {
             InitializeComponent();
         }
 
-        public ProjectModel DataModel { get ; set; }
-
-        public void AddProcess(Process process)
+        public void OnInitialize(MemoryInitEventArgs arg)
         {
-            ViewController.AllocateProcess(process);
+            lblMemorySize.Text = arg.NumberOfBlocks.ToString();
+            RefreshMemoryList(arg.Memory);
         }
 
-        public void RefreshView()
+        public void OnModified(MemoryModifiedEventArgs arg)
         {
-            
+            RefreshMemoryList(arg.Memory);
         }
 
-        public void RemoveProcess(Process process)
+        private void RefreshMemoryList(List<MemoryBlock> memory)
         {
-            ViewController.DeAllocateProcess(process);
+            lstMemory.Items.Clear();
+            foreach(MemoryBlock mem in memory)
+            {
+                ListViewItem lv = new ListViewItem(new[] { mem.ProcessId.ToString()});
+                lstMemory.Items.Add(lv);
+            }
+            Application.DoEvents();
         }
 
-        public void SetController(ProjectController controller)
+        private void ProjectView_Load(object sender, EventArgs e)
         {
-            ViewController = controller;
+
         }
     }
 }
