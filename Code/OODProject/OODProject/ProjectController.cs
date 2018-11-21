@@ -26,8 +26,9 @@ namespace OODProject
 
             BuddySystemStrategy strategy = new BuddySystemStrategy();
             strategy.OnInitialize += new OnMemoryInitialize(view.OnInitialize);
-            strategy.OnModified += new OnMemoryModified(view.OnModified);
-
+            strategy.OnAllocated += new OnProcessAllocate(view.OnAllocated);
+            strategy.OnDeAllocated += new OnProcessDeAllocate(view.OnDeAllocated);
+           
             strategy.Initialize(1024);
 
             view.Show();
@@ -40,6 +41,8 @@ namespace OODProject
 
                 Thread.Sleep(1000);
             }
+
+            Application.Run();
         }          
     }
 }

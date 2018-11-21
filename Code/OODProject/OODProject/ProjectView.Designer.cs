@@ -42,6 +42,7 @@
             this.lstProcesses.Name = "lstProcesses";
             this.lstProcesses.Size = new System.Drawing.Size(120, 95);
             this.lstProcesses.TabIndex = 0;
+            this.lstProcesses.SelectedIndexChanged += new System.EventHandler(this.lstProcesses_SelectedIndexChanged);
             // 
             // lblProcess
             // 

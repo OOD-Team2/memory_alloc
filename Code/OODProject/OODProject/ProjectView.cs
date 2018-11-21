@@ -25,15 +25,38 @@ namespace OODProject
         public void OnInitialize(MemoryInitEventArgs arg)
         {
             lblMemorySize.Text = arg.NumberOfBlocks.ToString();
-            RefreshMemoryList(arg.Memory);
+            //RefreshMemoryList(arg.Memory);
+            lstProcesses.DisplayMember = "Name";
 
             Application.DoEvents();
         }
 
-        public void OnModified(MemoryModifiedEventArgs arg)
+        public void OnAllocated(ProcessAllocateEventArgs arg)
         {
-            RefreshMemoryList(arg.Memory);
-            RefreshProcessList(arg.Processes);
+            lstProcesses.Items.Add(new Process { ID = arg.ProcessID, Name = arg.ProcessName });
+            _rectangles.Add(new Rectangle(arg.StartBlock, 0, arg.BlockLength - 1, 20));
+            panel1.Invalidate();
+
+            Application.DoEvents();
+        }
+
+        public void OnDeAllocated(ProcessDeAllocateEventArgs arg)
+        {
+            for (int j = lstProcesses.Items.Count -1; j >= 0; j--)
+            {
+                if (((Process)lstProcesses.Items[j]).Name == arg.ProcessName)
+                {
+                    lstProcesses.Items.RemoveAt(j);
+                }
+            }
+
+            for(int i =_rectangles.Count -1; i >=0; i--)
+            {
+                if (_rectangles[i].X == arg.StartBlock)
+                    _rectangles.RemoveAt(i);
+            }
+            
+            panel1.Invalidate();
 
             Application.DoEvents();
         }
@@ -69,9 +92,7 @@ namespace OODProject
                     }
                 }
             }
-            panel1.Invalidate();
-
-            
+            panel1.Invalidate();            
         }
 
         private void ProjectView_Load(object sender, EventArgs e)
@@ -93,6 +114,16 @@ namespace OODProject
             {
                 g.FillRectangle(myBrush, rectangle);
             }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lstProcesses_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -5,8 +5,9 @@ using System.Collections.Generic;
 namespace OODProject.Classes.MemoryAllocation
 {
     public delegate void OnMemoryInitialize(MemoryInitEventArgs arg);
-
-    public delegate void OnMemoryModified(MemoryModifiedEventArgs arg);
+        
+    public delegate void OnProcessAllocate(ProcessAllocateEventArgs arg);
+    public delegate void OnProcessDeAllocate(ProcessDeAllocateEventArgs arg);
 
     public class MemoryInitEventArgs : EventArgs
     {
@@ -14,9 +15,19 @@ namespace OODProject.Classes.MemoryAllocation
         public List<MemoryBlock> Memory { get; set; }
     }
 
-    public class MemoryModifiedEventArgs : EventArgs
+    public class ProcessAllocateEventArgs : EventArgs
     {
-        public List<MemoryBlock> Memory { get; set; }
-        public List<Process> Processes { get; set; }
+        public int ProcessID { get; set; }
+        public string ProcessName { get; set; }
+        public int StartBlock { get; set; }
+        public int BlockLength { get; set; }
+    }
+
+    public class ProcessDeAllocateEventArgs : EventArgs
+    {
+        public int ProcessID { get; set; }
+        public string ProcessName { get; set; }
+        public int StartBlock { get; set; }
+        public int BlockLength { get; set; }
     }
 }

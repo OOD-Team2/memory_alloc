@@ -36,7 +36,7 @@ namespace OODProject.Classes.MemoryAllocation
         }
 
 
-        public override bool AllocateProcess(Process proc)
+        public override bool AllocateProcess(Process proc, out ProcessAllocateEventArgs arg)
         {
             //Find the power of process size e.g 65K = 2 ^ 7
             int b = (int)Math.Ceiling(Math.Log(proc.MemoryInKB, 2));
@@ -77,6 +77,7 @@ namespace OODProject.Classes.MemoryAllocation
             if (Memory[startIndex].IsAssigned || Memory[endIndex].IsAssigned)
             {
                 //"No space available to allocate";
+                arg = new ProcessAllocateEventArgs();
                 return false;
             }
 
@@ -102,19 +103,17 @@ namespace OODProject.Classes.MemoryAllocation
             }
 
             // display message about where block has been placed in the memory
-            string msg = "";
+            arg = new ProcessAllocateEventArgs();
+            arg.ProcessID = proc.ID;
+            arg.ProcessName = proc.Name;
             for (int k = 0; k < MemorySize; k++)
             {
                 if (Memory[k].ProcessId == proc.ID && Memory[k].IsStart == true)
                 {
-                    msg = "Process " + proc.Name + " allocated memory of " + blockLength + "K" + " from " + k + " to ";
+                    arg.StartBlock = k;
+                    arg.BlockLength = blockLength;
                 }
-
-                if (Memory[k].ProcessId == proc.ID && Memory[k].IsEnd == true)
-                {
-                    msg += k + " with actual size of " + proc.MemoryInKB + "K";
-                    break;
-                }
+                
             }
 
             Processes.Add(proc);
@@ -122,21 +121,22 @@ namespace OODProject.Classes.MemoryAllocation
             return true;
         }
        
-        public override bool DeAllocateProcess(Process proc)
+        public override bool DeAllocateProcess(Process proc, out ProcessDeAllocateEventArgs arg)
         {
-            string msg = "";
+            
             bool isEnd = false;
-
+            int startIndex = 0;
+            int blockLength = 0;
             for (int i = 0; i < MemorySize; i++)
             {
                 if (Memory[i].ProcessId == proc.ID && Memory[i].IsStart == true)
                 {
-                    msg = "Process " + proc.Name + " has been deallocated from " + i + " to ";
+                    startIndex = i;
                 }
 
                 if (Memory[i].ProcessId == proc.ID && Memory[i].IsEnd == true)
                 {
-                    msg += i;
+                    blockLength = i - startIndex;
 
                     isEnd = true;
                 }
@@ -157,6 +157,7 @@ namespace OODProject.Classes.MemoryAllocation
                 if (Processes[i].ID == proc.ID)
                     Processes.RemoveAt(i);
             }
+            arg = new ProcessDeAllocateEventArgs { ProcessID = proc.ID, ProcessName = proc.Name, StartBlock = startIndex, BlockLength = blockLength };
 
             return true;
         }

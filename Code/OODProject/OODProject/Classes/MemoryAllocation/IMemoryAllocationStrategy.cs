@@ -19,9 +19,8 @@ namespace OODProject.Classes.MemoryAllocation
 
         //delegates for handlers
         public OnMemoryInitialize OnInitialize;
-        public OnMemoryModified OnModified;
-        
-
+        public OnProcessAllocate OnAllocated;
+        public OnProcessDeAllocate OnDeAllocated;
 
         public bool FeedProcess(Process proc)
         {
@@ -29,22 +28,28 @@ namespace OODProject.Classes.MemoryAllocation
 
             if (proc.Type == "Allocate")
             {
-                response = AllocateProcess(proc);
-            }else if (proc.Type == "DeAllocate")
+                ProcessAllocateEventArgs arg = new ProcessAllocateEventArgs();
+                response = AllocateProcess(proc, out arg);
+
+                if (response == true)
+                {
+                   OnAllocated(arg);
+                }
+
+            }
+            else if (proc.Type == "DeAllocate")
             {
-                response = DeAllocateProcess(proc);
-            }
+                ProcessDeAllocateEventArgs arg = new ProcessDeAllocateEventArgs();
+                response = DeAllocateProcess(proc, out arg);
 
-            if (response == true) {
-                MemoryModifiedEventArgs arg = new MemoryModifiedEventArgs { Memory = this.Memory, Processes = this.Processes };
-
-                OnModified(arg);
-            }
+                if (response == true)
+                    OnDeAllocated(arg);
+            }           
 
             return false;
         }
 
-        public abstract bool AllocateProcess(Process objProcess);
-        public abstract bool DeAllocateProcess(Process objProcess);
+        public abstract bool AllocateProcess(Process objProcess, out ProcessAllocateEventArgs arg);
+        public abstract bool DeAllocateProcess(Process objProcess, out ProcessDeAllocateEventArgs arg);
     }
 }
