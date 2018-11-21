@@ -42,7 +42,6 @@
             this.lstProcesses.Name = "lstProcesses";
             this.lstProcesses.Size = new System.Drawing.Size(120, 95);
             this.lstProcesses.TabIndex = 0;
-            this.lstProcesses.SelectedIndexChanged += new System.EventHandler(this.lstProcesses_SelectedIndexChanged);
             // 
             // lblProcess
             // 
@@ -91,8 +90,7 @@
             this.Controls.Add(this.lblProcess);
             this.Controls.Add(this.lstProcesses);
             this.Name = "ProjectView";
-            this.Text = "Memory Viewer";
-            this.Load += new System.EventHandler(this.ProjectView_Load);
+            this.Text = "Memory Viewer";            
             this.ResumeLayout(false);
             this.PerformLayout();
 
