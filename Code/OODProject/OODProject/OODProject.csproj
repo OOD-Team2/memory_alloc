@@ -51,6 +51,7 @@
     <Compile Include="Classes\MemoryAllocation\BuddySystem.cs" />
     <Compile Include="Classes\MemoryAllocation\IMemoryAllocationStrategy.cs" />
     <Compile Include="Classes\MemoryAllocation\EventArgument.cs" />
+    <Compile Include="Classes\Model\DrawObject.cs" />
     <Compile Include="Classes\Model\MemoryBlock.cs" />
     <Compile Include="Classes\Model\Process.cs" />
     <Compile Include="Classes\Model\ProcessFeeder.cs" />

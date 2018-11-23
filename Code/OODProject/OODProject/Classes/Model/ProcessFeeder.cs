@@ -17,13 +17,13 @@ namespace OODProject.Classes.Model
             ProcessList = new Queue<Process>();
 
             ProcessList.Enqueue(new Process { ID = 1, Name = "A", MemoryInKB = 34, Type = "Allocate" });
-            ProcessList.Enqueue(new Process { ID = 2, Name = "B", MemoryInKB = 66, Type = "Allocate" });
-            ProcessList.Enqueue(new Process { ID = 3, Name = "C", MemoryInKB = 35, Type = "Allocate" });
+            ProcessList.Enqueue(new Process { ID = 2, Name = "B", MemoryInKB = 108, Type = "Allocate" });
+            ProcessList.Enqueue(new Process { ID = 3, Name = "C", MemoryInKB = 400, Type = "Allocate" });
             ProcessList.Enqueue(new Process { ID = 4, Name = "D", MemoryInKB = 67, Type = "Allocate" });
-            ProcessList.Enqueue(new Process { ID = 2, Name = "B", MemoryInKB = 66, Type = "DeAllocate" });
+            ProcessList.Enqueue(new Process { ID = 2, Name = "B", MemoryInKB = 108, Type = "DeAllocate" });
             ProcessList.Enqueue(new Process { ID = 4, Name = "D", MemoryInKB = 67, Type = "DeAllocate" });
             ProcessList.Enqueue(new Process { ID = 1, Name = "A", MemoryInKB = 34, Type = "DeAllocate" });
-            ProcessList.Enqueue(new Process { ID = 3, Name = "C", MemoryInKB = 35, Type = "DeAllocate" });
+            ProcessList.Enqueue(new Process { ID = 3, Name = "C", MemoryInKB = 400, Type = "DeAllocate" });
         }
 
         public Process GetNextProcess()
