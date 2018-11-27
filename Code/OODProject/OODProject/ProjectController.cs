@@ -37,9 +37,10 @@ namespace OODProject
             ProcessFeeder feeder = new ProcessFeeder();
             while (feeder.PeekNextProcess() != null)
             {
-                strategy.FeedProcess(feeder.GetNextProcess());
-
+                Application.DoEvents();
                 Thread.Sleep(1000);
+
+                strategy.FeedProcess(feeder.GetNextProcess());                
             }
 
             Application.Run();

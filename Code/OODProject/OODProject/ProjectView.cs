@@ -24,6 +24,7 @@ namespace OODProject
 
         public void OnInitialize(MemoryInitEventArgs arg)
         {
+            this.Text += " - " + arg.MemoryAlgorithmName;
             lblMemorySize.Text = arg.NumberOfBlocks.ToString();
             
             Application.DoEvents();
@@ -61,6 +62,11 @@ namespace OODProject
                 g.FillRectangle(myBrush, drawObject.Rectangle);
                 g.DrawString("  " + drawObject.ProcessName, fontArial, Brushes.White, drawObject.Rectangle);
             }
+        }
+
+        private void ProjectView_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

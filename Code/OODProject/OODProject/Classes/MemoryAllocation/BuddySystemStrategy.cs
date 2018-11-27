@@ -28,6 +28,7 @@ namespace OODProject.Classes.MemoryAllocation
 
             MemoryInitEventArgs arg = new MemoryInitEventArgs
             {
+                MemoryAlgorithmName = "Buddy System",
                 NumberOfBlocks = MemorySize,
                 Memory = this.Memory
             };

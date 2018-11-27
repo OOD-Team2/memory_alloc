@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 namespace OODProject.Classes.MemoryAllocation
 {
-    public delegate void OnMemoryInitialize(MemoryInitEventArgs arg);
-        
+    public delegate void OnMemoryInitialize(MemoryInitEventArgs arg);        
     public delegate void OnProcessAllocate(ProcessAllocateEventArgs arg);
     public delegate void OnProcessDeAllocate(ProcessDeAllocateEventArgs arg);
 
     public class MemoryInitEventArgs : EventArgs
     {
+        public string MemoryAlgorithmName { get; set; }
         public int NumberOfBlocks { get; set; }
         public List<MemoryBlock> Memory { get; set; }
     }
