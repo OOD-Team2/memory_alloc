@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\MemoryAllocation\AllocStrategy.cs" />
     <Compile Include="Classes\MemoryAllocation\BuddySystemStrategy.cs" />
     <Compile Include="Classes\MemoryAllocation\BuddySystem.cs" />
     <Compile Include="Classes\MemoryAllocation\IMemoryAllocationStrategy.cs" />
