@@ -1,0 +1,5 @@
+D:\vis studio\memory_alloc-master\Code\OODProject\OODProject\obj\Debug\OODProject.csprojAssemblyReference.cache
+D:\vis studio\memory_alloc-master\Code\OODProject\OODProject\obj\Debug\OODProject.ProjectView.resources
+D:\vis studio\memory_alloc-master\Code\OODProject\OODProject\obj\Debug\OODProject.Properties.Resources.resources
+D:\vis studio\memory_alloc-master\Code\OODProject\OODProject\obj\Debug\OODProject.csproj.GenerateResource.cache
+D:\vis studio\memory_alloc-master\Code\OODProject\OODProject\obj\Debug\OODProject.csproj.CoreCompileInputs.cache
