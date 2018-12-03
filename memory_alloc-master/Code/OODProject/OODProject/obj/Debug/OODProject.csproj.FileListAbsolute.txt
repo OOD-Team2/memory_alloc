@@ -3,3 +3,8 @@ D:\vis studio\memory_alloc-master\Code\OODProject\OODProject\obj\Debug\OODProjec
 D:\vis studio\memory_alloc-master\Code\OODProject\OODProject\obj\Debug\OODProject.Properties.Resources.resources
 D:\vis studio\memory_alloc-master\Code\OODProject\OODProject\obj\Debug\OODProject.csproj.GenerateResource.cache
 D:\vis studio\memory_alloc-master\Code\OODProject\OODProject\obj\Debug\OODProject.csproj.CoreCompileInputs.cache
+D:\vis studio\memory_alloc-master\Code\OODProject\OODProject\bin\Debug\OODProject.exe.config
+D:\vis studio\memory_alloc-master\Code\OODProject\OODProject\bin\Debug\OODProject.exe
+D:\vis studio\memory_alloc-master\Code\OODProject\OODProject\bin\Debug\OODProject.pdb
+D:\vis studio\memory_alloc-master\Code\OODProject\OODProject\obj\Debug\OODProject.exe
+D:\vis studio\memory_alloc-master\Code\OODProject\OODProject\obj\Debug\OODProject.pdb

@@ -92,7 +92,8 @@ namespace OODProject.Classes.MemoryAllocation
 
         public override bool DeAllocateProcess(Process proc, out ProcessDeAllocateEventArgs arg)
         {
-
+            
+            // Handles external memory
             bool isEnd = false;
             int startIndex = 0;
             int blockLength = 0;
@@ -128,7 +129,34 @@ namespace OODProject.Classes.MemoryAllocation
             }
             arg = new ProcessDeAllocateEventArgs { ProcessID = proc.ID, ProcessName = proc.Name, StartBlock = startIndex, BlockLength = blockLength };
 
-            return true;
+            // Handles internal class memory
+            BlockFit b;
+            for (int i = 0; i < allocated.Count; i++)
+            {
+                b = allocated[i];
+                if (b.ID == proc.ID)
+                {
+                    allocated.Remove(allocated[i]);
+                    for (int j = 0; j < avail.Count; j++)
+                    {
+                        BlockFit bl = avail[j];
+                        if (b.start_pos + b.MemoryInKB == bl.start_pos)
+                        {
+                            b = new BlockFit() { MemoryInKB = b.MemoryInKB + bl.MemoryInKB, start_pos = b.start_pos };
+                            avail.Remove(avail[j]);
+
+                        }
+                        if (bl.start_pos + bl.MemoryInKB == b.start_pos)
+                        {
+                            b = new BlockFit() { MemoryInKB = b.MemoryInKB + bl.MemoryInKB, start_pos = bl.start_pos };
+                            avail.Remove(avail[j]);
+                        }
+                    }
+                    avail.Add(b);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 
