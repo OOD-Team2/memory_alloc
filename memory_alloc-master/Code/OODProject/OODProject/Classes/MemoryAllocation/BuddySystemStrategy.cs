@@ -11,6 +11,7 @@ namespace OODProject.Classes.MemoryAllocation
     {
         public BuddySystemStrategy() {}
 
+        override
         public void Initialize(int memSize)
         {
             MemorySize = memSize;

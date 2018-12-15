@@ -15,6 +15,7 @@ namespace OODProject.Classes.MemoryAllocation
 
         public List<BlockFit> allocated = new List<BlockFit>();
 
+        override
         public void Initialize(int memSize)
         {
             MemorySize = memSize;
@@ -38,6 +39,13 @@ namespace OODProject.Classes.MemoryAllocation
                 Memory = this.Memory
             };
 
+            BlockFit firstblock = new BlockFit();
+            firstblock.start_pos = 0;
+            firstblock.ID = 0;
+            firstblock.blockLength = MemorySize;
+            avail.Add(firstblock);
+
+
             OnInitialize(arg);
         }
 
@@ -47,21 +55,23 @@ namespace OODProject.Classes.MemoryAllocation
             BlockFit b, newSpace;
             List<BlockFit> viableSpaces = new List<BlockFit>();
 
-            newSpace = new BlockFit();
             int size = proc.MemoryInKB;
-            
+
+            newSpace = new BlockFit();
+            int start_position = 0;
+
             // adds all possible fitting blocks to list viableSpaces
-            for (int i = 0; i < avail.Count; i ++)
+            for (int i = 0; i < avail.Count; i++)
             {
                 b = avail[i];
-                if (b.MemoryInKB >= size)
+                if (b.blockLength >= size)
                 {
                     viableSpaces.Add(b);
                 }
             }
 
             // orders the blocks so index 0 is the best fit
-            List<BlockFit> ordered = viableSpaces.OrderBy(f => f.MemoryInKB).ToList();
+            List<BlockFit> ordered = viableSpaces.OrderBy(f => f.blockLength).ToList();
 
             // modifies the allocated and available lists for adding this new memory block
             if (viableSpaces.Count != 0)
@@ -69,22 +79,30 @@ namespace OODProject.Classes.MemoryAllocation
                 for (int i = 0; i < viableSpaces.Count; i++)
                 {
                     BlockFit block_check = viableSpaces[i];
-                    if (block_check.MemoryInKB == ordered[0].MemoryInKB)
+                    if (block_check.blockLength == ordered[0].blockLength)
                     {
-
+                        // creates a new allocation block
                         newSpace.start_pos = block_check.start_pos;
-                        newSpace.MemoryInKB = size;
+                        newSpace.blockLength = size;
                         newSpace.ID = proc.ID;
                         allocated.Add(newSpace);
-                        block_check.start_pos = block_check.start_pos + size;
-                        block_check.MemoryInKB = block_check.MemoryInKB - size;
-                    
+
+                        //updates the available block
+                        block_check.start_pos = block_check.start_pos + size - 1;
+                        block_check.blockLength = block_check.blockLength - size;
+
+                        //updates for the start position for the display
+                        start_position = newSpace.start_pos;
                     }
                 }
             }
 
-            // needs fixing
-            arg = new ProcessAllocateEventArgs { ProcessID = proc.ID, ProcessName = proc.Name, BlockLength = proc.MemoryInKB };
+            
+
+            // places into memory location
+            arg = new ProcessAllocateEventArgs { ProcessID = proc.ID, ProcessName = proc.Name, BlockLength = size, StartBlock = start_position};
+
+            Processes.Add(proc);
 
             return true;
 
@@ -93,7 +111,7 @@ namespace OODProject.Classes.MemoryAllocation
         public override bool DeAllocateProcess(Process proc, out ProcessDeAllocateEventArgs arg)
         {
             
-            // Handles external memory
+            // modifies memory
             bool isEnd = false;
             int startIndex = 0;
             int blockLength = 0;
@@ -122,14 +140,14 @@ namespace OODProject.Classes.MemoryAllocation
                 if (isEnd) break;
             }
 
+            // finds and removes the target process 
             for (int i = Processes.Count - 1; i > 0; i--)
             {
                 if (Processes[i].ID == proc.ID)
                     Processes.RemoveAt(i);
             }
-            arg = new ProcessDeAllocateEventArgs { ProcessID = proc.ID, ProcessName = proc.Name, StartBlock = startIndex, BlockLength = blockLength };
 
-            // Handles internal class memory
+            // converts the allocated data to available data
             BlockFit b;
             for (int i = 0; i < allocated.Count; i++)
             {
@@ -139,31 +157,37 @@ namespace OODProject.Classes.MemoryAllocation
                     allocated.Remove(allocated[i]);
                     for (int j = 0; j < avail.Count; j++)
                     {
+                        // if the newly available blocks are next to already existing available blocks, merge them
                         BlockFit bl = avail[j];
-                        if (b.start_pos + b.MemoryInKB == bl.start_pos)
+                        if (b.start_pos + b.blockLength - 1 == bl.start_pos)
                         {
-                            b = new BlockFit() { MemoryInKB = b.MemoryInKB + bl.MemoryInKB, start_pos = b.start_pos };
+                            b = new BlockFit() { ID = bl.ID, blockLength = b.blockLength + bl.blockLength, start_pos = b.start_pos };
                             avail.Remove(avail[j]);
 
                         }
-                        if (bl.start_pos + bl.MemoryInKB == b.start_pos)
+                        if (bl.start_pos + bl.blockLength - 1 == b.start_pos)
                         {
-                            b = new BlockFit() { MemoryInKB = b.MemoryInKB + bl.MemoryInKB, start_pos = bl.start_pos };
+                            b = new BlockFit() { blockLength = b.blockLength + bl.blockLength, start_pos = bl.start_pos };
                             avail.Remove(avail[j]);
                         }
                     }
                     avail.Add(b);
+
+                    arg = new ProcessDeAllocateEventArgs { ProcessID = proc.ID, ProcessName = proc.Name, StartBlock = b.start_pos, BlockLength = b.blockLength };
+
                     return true;
                 }
             }
+            arg = null;
             return false;
         }
     }
 
+    // object for the available/allocated lists
     public class BlockFit
     {
         public Int32 start_pos { get; set; }
-        public Int32 MemoryInKB { get; set; }
+        public Int32 blockLength { get; set; }
         public Int32 ID { get; set; }
     }
 }

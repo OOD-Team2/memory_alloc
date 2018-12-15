@@ -24,7 +24,7 @@ namespace OODProject
             ProjectView view = new ProjectView();
             view.Visible = false;
 
-            BuddySystemStrategy strategy = new BuddySystemStrategy();
+            IMemoryAllocationStrategy strategy = new AllocStrategy();
             strategy.OnInitialize += new OnMemoryInitialize(view.OnInitialize);
             strategy.OnAllocated += new OnProcessAllocate(view.OnAllocated);
             strategy.OnDeAllocated += new OnProcessDeAllocate(view.OnDeAllocated);

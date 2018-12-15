@@ -22,6 +22,7 @@ namespace OODProject.Classes.MemoryAllocation
         public OnProcessAllocate OnAllocated;
         public OnProcessDeAllocate OnDeAllocated;
 
+        
         public bool FeedProcess(Process proc)
         {
             bool response = false;
@@ -49,6 +50,7 @@ namespace OODProject.Classes.MemoryAllocation
             return false;
         }
 
+        public abstract void Initialize(int memsize);
         public abstract bool AllocateProcess(Process objProcess, out ProcessAllocateEventArgs arg);
         public abstract bool DeAllocateProcess(Process objProcess, out ProcessDeAllocateEventArgs arg);
     }
