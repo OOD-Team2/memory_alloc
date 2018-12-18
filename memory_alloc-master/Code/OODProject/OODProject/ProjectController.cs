@@ -46,19 +46,32 @@ namespace OODProject
 
             strategyBestFit.Initialize(1024);
 
-            //Simulate Best Fit & Buddy System same time
-            viewBestFit.Show();
+            //Simulate Buddy System First
+            viewBuddy.StartPosition = FormStartPosition.CenterParent;
             viewBuddy.Show();
 
-            //start feeding data from ProcessFeederClass
-            ProcessFeeder feeder = new ProcessFeeder();
-            while (feeder.PeekNextProcess() != null)
+            //Simulate Best Fit AFTER Buddy System completes
+            viewBestFit.StartPosition = FormStartPosition.CenterScreen;
+            viewBestFit.Show();
+
+            //start feeding data from ProcessFeederClass to Buddy System
+            ProcessFeeder feederBuddy = new ProcessFeeder();
+            while (feederBuddy.PeekNextProcess() != null)
             {
                 Application.DoEvents();
                 Thread.Sleep(1000);
 
-                strategyBestFit.FeedProcess(feeder.GetNextProcess());
-                strategyBuddy.FeedProcess(feeder.GetNextProcess());
+                strategyBuddy.FeedProcess(feederBuddy.GetNextProcess());
+            }
+
+            //Start feeding data from ProcessFeaderClass to Best Fit
+            ProcessFeeder feederBestFit = new ProcessFeeder();
+            while (feederBestFit.PeekNextProcess() != null)
+            {
+                Application.DoEvents();
+                Thread.Sleep(1000);
+
+                strategyBestFit.FeedProcess(feederBestFit.GetNextProcess());
             }
 
             Application.Run();
