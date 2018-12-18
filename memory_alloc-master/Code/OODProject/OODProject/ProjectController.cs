@@ -21,17 +21,34 @@ namespace OODProject
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new ProjectView());
 
-            ProjectView view = new ProjectView();
-            view.Visible = false;
+            // ProjectView - Best Fit
+            ProjectView viewBestFit = new ProjectView();
+            viewBestFit.Visible = false;
 
-            IMemoryAllocationStrategy strategy = new AllocStrategy();
-            strategy.OnInitialize += new OnMemoryInitialize(view.OnInitialize);
-            strategy.OnAllocated += new OnProcessAllocate(view.OnAllocated);
-            strategy.OnDeAllocated += new OnProcessDeAllocate(view.OnDeAllocated);
-           
-            strategy.Initialize(1024);
+            // ProjectView - Buddy System
+            ProjectView viewBuddy = new ProjectView();
+            viewBuddy.Visible = false;
 
-            view.Show();
+            //Buddy Sytem
+            IMemoryAllocationStrategy strategyBuddy = new BuddySystemStrategy();
+            strategyBuddy.OnInitialize += new OnMemoryInitialize(viewBuddy.OnInitialize);
+            strategyBuddy.OnAllocated += new OnProcessAllocate(viewBuddy.OnAllocated);
+            strategyBuddy.OnDeAllocated += new OnProcessDeAllocate(viewBuddy.OnDeAllocated);
+
+            strategyBuddy.Initialize(1024);
+
+
+            //Best Fit
+            IMemoryAllocationStrategy strategyBestFit = new AllocStrategy();
+            strategyBestFit.OnInitialize += new OnMemoryInitialize(viewBestFit.OnInitialize);
+            strategyBestFit.OnAllocated += new OnProcessAllocate(viewBestFit.OnAllocated);
+            strategyBestFit.OnDeAllocated += new OnProcessDeAllocate(viewBestFit.OnDeAllocated);
+
+            strategyBestFit.Initialize(1024);
+
+            //Simulate Best Fit & Buddy System same time
+            viewBestFit.Show();
+            viewBuddy.Show();
 
             //start feeding data from ProcessFeederClass
             ProcessFeeder feeder = new ProcessFeeder();
@@ -40,7 +57,8 @@ namespace OODProject
                 Application.DoEvents();
                 Thread.Sleep(1000);
 
-                strategy.FeedProcess(feeder.GetNextProcess());                
+                strategyBestFit.FeedProcess(feeder.GetNextProcess());
+                strategyBuddy.FeedProcess(feeder.GetNextProcess());
             }
 
             Application.Run();

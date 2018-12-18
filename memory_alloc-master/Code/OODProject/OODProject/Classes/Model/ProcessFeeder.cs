@@ -26,6 +26,8 @@ namespace OODProject.Classes.Model
             ProcessList.Enqueue(new Process { ID = 6, Name = "F", MemoryInKB = 108, Type = "Allocate" });
             ProcessList.Enqueue(new Process { ID = 1, Name = "A", MemoryInKB = 34, Type = "DeAllocate" });
             ProcessList.Enqueue(new Process { ID = 3, Name = "C", MemoryInKB = 400, Type = "DeAllocate" });
+            ProcessList.Enqueue(new Process { ID = 5, Name = "E", MemoryInKB = 34, Type = "DeAllocate" });
+            ProcessList.Enqueue(new Process { ID = 6, Name = "F", MemoryInKB = 108, Type = "DeAllocate" });
         }
 
         public Process GetNextProcess()
