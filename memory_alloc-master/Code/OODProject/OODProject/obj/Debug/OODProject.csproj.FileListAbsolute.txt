@@ -18,3 +18,13 @@ D:/vis studio/memory_alloc-master/Code/OODProject/OODProject/obj/Debug/OODProjec
 /Users/christopherunger/Desktop/alloc/memory_alloc/memory_alloc-master/Code/OODProject/OODProject/obj/Debug/OODProject.csproj.CoreCompileInputs.cache
 /Users/christopherunger/Desktop/alloc/memory_alloc/memory_alloc-master/Code/OODProject/OODProject/obj/Debug/OODProject.exe
 /Users/christopherunger/Desktop/alloc/memory_alloc/memory_alloc-master/Code/OODProject/OODProject/obj/Debug/OODProject.pdb
+C:\Users\cchai\source\repos\OOD-Team2\memory_alloc\memory_alloc-master\Code\OODProject\OODProject\bin\Debug\OODProject.exe.config
+C:\Users\cchai\source\repos\OOD-Team2\memory_alloc\memory_alloc-master\Code\OODProject\OODProject\bin\Debug\OODProject.exe
+C:\Users\cchai\source\repos\OOD-Team2\memory_alloc\memory_alloc-master\Code\OODProject\OODProject\bin\Debug\OODProject.pdb
+C:\Users\cchai\source\repos\OOD-Team2\memory_alloc\memory_alloc-master\Code\OODProject\OODProject\obj\Debug\OODProject.csprojAssemblyReference.cache
+C:\Users\cchai\source\repos\OOD-Team2\memory_alloc\memory_alloc-master\Code\OODProject\OODProject\obj\Debug\OODProject.ProjectView.resources
+C:\Users\cchai\source\repos\OOD-Team2\memory_alloc\memory_alloc-master\Code\OODProject\OODProject\obj\Debug\OODProject.Properties.Resources.resources
+C:\Users\cchai\source\repos\OOD-Team2\memory_alloc\memory_alloc-master\Code\OODProject\OODProject\obj\Debug\OODProject.csproj.GenerateResource.cache
+C:\Users\cchai\source\repos\OOD-Team2\memory_alloc\memory_alloc-master\Code\OODProject\OODProject\obj\Debug\OODProject.csproj.CoreCompileInputs.cache
+C:\Users\cchai\source\repos\OOD-Team2\memory_alloc\memory_alloc-master\Code\OODProject\OODProject\obj\Debug\OODProject.exe
+C:\Users\cchai\source\repos\OOD-Team2\memory_alloc\memory_alloc-master\Code\OODProject\OODProject\obj\Debug\OODProject.pdb

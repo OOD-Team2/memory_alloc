@@ -147,13 +147,22 @@ namespace OODProject.Classes.MemoryAllocation
                     Processes.RemoveAt(i);
             }
 
+            arg = new ProcessDeAllocateEventArgs
+            {
+                ProcessID = proc.ID,
+                ProcessName = proc.Name
+            };
+
             // converts the allocated data to available data
-            BlockFit b;
+                BlockFit b = null;
             for (int i = 0; i < allocated.Count; i++)
             {
                 b = allocated[i];
                 if (b.ID == proc.ID)
                 {
+                    arg.StartBlock = b.start_pos;
+                    arg.BlockLength = b.blockLength;
+
                     allocated.Remove(allocated[i]);
                     for (int j = 0; j < avail.Count; j++)
                     {
@@ -163,7 +172,6 @@ namespace OODProject.Classes.MemoryAllocation
                         {
                             b = new BlockFit() { ID = bl.ID, blockLength = b.blockLength + bl.blockLength, start_pos = b.start_pos };
                             avail.Remove(avail[j]);
-
                         }
                         if (bl.start_pos + bl.blockLength - 1 == b.start_pos)
                         {
@@ -173,13 +181,10 @@ namespace OODProject.Classes.MemoryAllocation
                     }
                     avail.Add(b);
 
-                    arg = new ProcessDeAllocateEventArgs { ProcessID = proc.ID, ProcessName = proc.Name, StartBlock = b.start_pos, BlockLength = b.blockLength };
-
-                    return true;
+                    break;
                 }
             }
-            arg = null;
-            return false;
+            return true;
         }
     }
 

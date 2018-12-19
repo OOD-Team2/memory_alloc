@@ -37,7 +37,6 @@ namespace OODProject
 
             strategyBuddy.Initialize(1024);
 
-
             //Best Fit
             IMemoryAllocationStrategy strategyBestFit = new AllocStrategy();
             strategyBestFit.OnInitialize += new OnMemoryInitialize(viewBestFit.OnInitialize);
@@ -61,18 +60,11 @@ namespace OODProject
                 Application.DoEvents();
                 Thread.Sleep(1000);
 
-                strategyBuddy.FeedProcess(feederBuddy.GetNextProcess());
-            }
+                Process proc = feederBuddy.GetNextProcess();
 
-            //Start feeding data from ProcessFeaderClass to Best Fit
-            ProcessFeeder feederBestFit = new ProcessFeeder();
-            while (feederBestFit.PeekNextProcess() != null)
-            {
-                Application.DoEvents();
-                Thread.Sleep(1000);
-
-                strategyBestFit.FeedProcess(feederBestFit.GetNextProcess());
-            }
+                strategyBuddy.FeedProcess(proc);
+                strategyBestFit.FeedProcess(proc);
+            }           
 
             Application.Run();
         }          
