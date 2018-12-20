@@ -63,8 +63,19 @@ namespace OODProject
                 Process proc = feederBuddy.GetNextProcess();
 
                 strategyBuddy.FeedProcess(proc);
+            }
+
+            //start feeding data from ProcessFeederClass to Best Fit
+            ProcessFeeder feederBestFit = new ProcessFeeder();
+            while (feederBestFit.PeekNextProcess() != null)
+            {
+                Application.DoEvents();
+                Thread.Sleep(1000);
+
+                Process proc = feederBestFit.GetNextProcess();
+
                 strategyBestFit.FeedProcess(proc);
-            }           
+            }
 
             Application.Run();
         }          
